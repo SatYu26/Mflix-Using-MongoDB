@@ -1,0 +1,10 @@
+<form id="comment-form" method='POST' action="{{ url_for('show_movie_comments', id=movie['_id']) }}">
+  <textarea
+          class="textarea"
+          name="comment"
+          form="comment-form"
+          placeholder="What did you think of {{ movie['title'] }}? Join the conversation here."
+          style="background: #111111; color: #d2d2d2; margin-bottom: 10px;"
+          required></textarea>
+    <input class="button is-primary" type="submit" value="Submit">
+</form>

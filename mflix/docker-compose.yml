@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  mflix_app:
+    depends_on:
+      - auth_service
+      - movie_service
+    build: ./mflix_app
+    environment:
+      - USER=zianglu
+      - PASSWORD=Zest2016!
+      - DB_NAME=mflix
+    ports:
+      # Bind container port 8000 to the host port 8000
+      - "8000:8000"
+    restart: always
+
+  auth_service:
+    build: ./auth_service
+    expose:
+      # Since we'll use Gunicorn to run the application, we need to expose its
+      # default port 8000, rather than the default port 5000 of Flask
+      # development server.
+      - 8000
+    restart: always
+
+  movie_service:
+    build: ./movie_service
+    expose:
+      - 8000
+    restart: always

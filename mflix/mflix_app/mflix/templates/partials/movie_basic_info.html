@@ -1,0 +1,14 @@
+<p>
+<span class="tag is-rounded is-warning">{{ movie['rated'] or "No rating found." }}</span>
+</p>
+
+<p>
+<span>Directed by</span>
+{% for director in movie["directors"] %}
+    <span><a href="/?search={{ director }}">{{ director }}</a></span>
+{% endfor %}
+<span>{{ movie["year"] }}</span>
+<br/>
+<span>Runtime:</span>
+<span class="tag is-white">{{ movie['runtime'] // 60 }} hr {{ movie['runtime'] % 60 }} min</span>
+</p>

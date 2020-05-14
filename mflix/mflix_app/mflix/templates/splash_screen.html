@@ -1,0 +1,17 @@
+{% include 'head.html' %}
+<section class="hero is-fullheight is-medium">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">Mflix</h1>
+            <h2 class="subtitle">A movie experience</h2>
+
+            <h3 class="has-text-warning">You must log into an account to view this content.</h3>
+
+            <hr/>
+            <div class="content">
+                <a class="button is-primary is-medium" href="{{ url_for('signup') }}">Sign Up</a>
+                <a class="button is-info is-medium " href="{{ url_for('login') }}">Log In</a>
+            </div>
+        </div>
+    </div>
+</section>

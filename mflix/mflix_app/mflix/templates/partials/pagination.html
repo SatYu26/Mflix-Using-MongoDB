@@ -1,0 +1,13 @@
+<nav class="pagination">
+    {% if prev_page and page > 0 %}
+        <a class="pagination-previous" href="?{{ prev_page }}">Previous Page</a>
+    {% else %}
+        <a class="pagination-previous" disabled>Previous Page</a>
+    {% endif %}
+
+    {% if next_page and (page + 1) * entries_per_page <= total_num_of_entries %}
+        <a class="pagination-next" href="?{{ next_page }}">Next Page</a>
+    {% else %}
+        <a class="pagination-next" disabled>Next Page</a>
+    {% endif %}
+</nav>

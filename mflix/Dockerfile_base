@@ -1,0 +1,10 @@
+FROM python:3.7-stretch
+LABEL maintainer="luziang1005@gmail.com"
+# Setting for Python 3 encoding
+ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+
+# Install all the dependency packages
+COPY requirements.txt /
+RUN pip3 install -r requirements.txt
+
+COPY env.sh /

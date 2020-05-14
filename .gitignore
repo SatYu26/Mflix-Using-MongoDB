@@ -1,0 +1,16 @@
+.DS_Store
+
+# Virtual environment
+mflix-env/
+
+# Python compilation files
+__python__/
+*.pyc
+
+# Jupyter files
+*.ipynb
+.ipynb_checkpoints/
+
+# Project files
+.idea/
+.vscode/

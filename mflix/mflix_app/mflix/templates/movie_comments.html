@@ -1,0 +1,23 @@
+{% extends "mflix/templates/header.html" %}
+
+{% block body %}
+{% if movie %}
+    <div class="content">
+        {% if 'comments' in movie %}
+            <h1>All {{ movie['num_mflix_comments'] }} comments for <a href="/movies/{{ movie['_id'] }}">{{ movie['title'] }}</a></h1>
+            {% include "partials/movie_basic_info.html" %}
+
+            <hr/>
+            {% include "partials/comments_form.html" %}
+
+            <hr/>
+            {% include "partials/comments_list.html" %}
+        {% else %}
+            <h1>No comments yet for <a href="/movies/{{ movie['_id'] }}">{{ movie['title'] }}</a></h1>
+            {% include "partials/comments_form.html" %}
+        {% endif %}
+    </div>
+{% else %}
+    {% include "partials/no_movie_found.html" %}
+{% endif %}
+{% endblock %}

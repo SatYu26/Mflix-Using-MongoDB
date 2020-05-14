@@ -1,0 +1,9 @@
+.DS_Store
+
+# Python compilation files
+__pycache__/
+*.pyc
+
+# Docker-related files
+Dockerfile
+.dockerignore

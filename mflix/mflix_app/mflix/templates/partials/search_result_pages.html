@@ -1,0 +1,26 @@
+{% if total_num_of_entries > 0 %}
+    <div class="content container has-text-centered">
+        <h6>
+            {% set start_entry_index = entries_per_page * page %}
+
+            <span>Showing {{ start_entry_index + 1 }}</span>
+            <span> - </span>
+            {% if start_entry_index + entries_per_page <= total_num_of_entries %}
+                <span>{{ start_entry_index + entries_per_page }}</span>
+            {% else %}
+                <span>{{ total_num_of_entries % entries_per_page }}</span>
+            {% endif %}
+            <span> of {{ "{:,}".format(total_num_of_entries) }} results </span>
+
+            {% if filters['$text'] and filters['$text']['$search'] and filters['genres'] %}
+                <span>for "{{ filters['$text']['$search'] }}" in the "{{ filters['genres'] }}" genre.</span>
+            {% elif filters['$text'] and filters['$text']['$search'] %}
+                <span>for "{{ filters['$text']['$search'] }}".</span>
+            {% elif filters['genres'] %}
+                <span>in the "{{ filters['genres'] }}" genre.</span>
+            {% else %}
+                <span>for all movies.</span>
+            {% endif %}
+        </h6>
+    </div>
+{% endif %}

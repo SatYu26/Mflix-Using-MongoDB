@@ -1,0 +1,43 @@
+{% extends "header.html" %}
+
+{% block body %}
+{% include "partials/search_result_pages.html" %}
+
+<div class="columns is-multiline">
+    {% for movie in movies %}
+        <div class="column is-3-desktop is-6-tablet content has-text-centered">
+            <div class="box has-text-centered" style="height: 675px;">
+                <a href="/movies/{{ movie['_id'] }}" style="display: block; width: 100%; height: 100%;">
+                    <div style="height: 400px;">
+                        <img src="{{ movie['poster'] or 'http://www.reelviews.net/resources/img/default_poster.jpg' }}" alt="No movie image found." style="overflow: hidden; width: auto; height: 100%;">
+                    </div>
+                    <h4 style="margin-top: 15px; color: #6aaf4e;">{{ movie['title'] }}</h4>
+                    <p>
+                    <span class="tag is-rounded">{{ movie['year'] }}</span>
+                    <span class="tag is-rounded is-warning">{{ movie['rated'] }}</span>
+                    </p>
+                    <h6>Starring {{ ', '.join(movie['cast']) }}</h6>
+
+                    {% set RATING_NAME = 'IMDB' %}
+                    {% set VALID_RATING = movie.imdb and movie.imdb.rating and movie.imdb.rating is number %}
+                    {% set CONDENSED_RATING = True %}
+                    {% if VALID_RATING %}
+                        {% set MAX_RATING = 10 %}
+                        {% set rating = movie['imdb']['rating'] %}
+                        {% include "partials/rating_bar.html" %}
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<hr/>
+<div class="has-text-centered">
+    <h6>Filter By Genre</h6>
+    {% for genre in all_genres %}
+        <a class="tag button is-small is-dark" href="/?genre={{ genre }}" style="margin: 3px 2px;">{{ genre }}</a>
+    {% endfor %}
+</div>
+{% include "partials/pagination.html" %}
+{% endblock %}

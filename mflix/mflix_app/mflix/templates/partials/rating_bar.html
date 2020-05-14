@@ -1,0 +1,32 @@
+{% set rating_out_of_100 = rating * 100 / MAX_RATING %}
+
+{% if rating_out_of_100 >= 80 %}
+    {% set progress_color = 'success' %}
+{% elif rating_out_of_100 >= 60 %}
+    {% set progress_color = 'info' %}
+{% else %}
+    {% set progress_color = 'danger' %}
+{% endif %}
+
+{% if VALID_RATING and CONDENSED_RATING %}
+    <span style="color: #f2f2f2;">{{ RATING_NAME }} Rating:</span>
+    <span class="tag is-{{progress_color}}">{{ rating }} / {{ MAX_RATING }}</span>
+{% elif VALID_RATING %}
+    <p>
+    <span>{{ RATING_NAME }} Rating: </span>
+
+    {% if MAX_RATING == 100 %}
+        <span>{{ rating }}</span>
+    {% else %}
+        <span>{{ rating }} / {{ MAX_RATING }}</span>
+    {% endif %}
+
+    {% if votes %}
+        <small>(from {{"{:,}".format(votes)}} {{ RATING_NAME }} reviews)</small>
+    {% endif %}
+    </p>
+
+    <progress class="progress is-{{ progress_color }}" value="{{ rating_out_of_100 }}" max="100"> {{ rating_out_of_100 }}%</progress>
+{% else %}
+    <p>No IMDB rating available.</p>
+{% endif %}

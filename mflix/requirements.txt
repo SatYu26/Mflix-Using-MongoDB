@@ -1,0 +1,28 @@
+-i https://pypi.tuna.tsinghua.edu.cn/simple/
+aniso8601==8.0.0
+bcrypt==3.1.7
+certifi==2019.11.28
+cffi==1.14.0
+chardet==3.0.4
+click==7.0
+dnspython==1.16.0
+flask-bcrypt==0.7.1
+flask-login==0.5.0
+flask-marshmallow==0.11.0
+flask-restful==0.3.8
+flask==1.1.1
+gevent==1.4.0
+greenlet==0.4.15 ; platform_python_implementation == 'CPython'
+gunicorn==20.0.4
+idna==2.9
+itsdangerous==1.1.0
+jinja2==2.11.1
+markupsafe==1.1.1
+marshmallow==3.5.1
+pycparser==2.20
+pymongo==3.10.1
+pytz==2019.3
+requests==2.23.0
+six==1.14.0
+urllib3==1.25.8
+werkzeug==1.0.0

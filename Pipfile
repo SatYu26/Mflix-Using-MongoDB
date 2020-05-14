@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+dnspython = "*"
+flask = "*"
+flask-login = "*"
+flask-bcrypt = "*"
+flask-marshmallow = "*"
+flask-restful = "*"
+gevent = "*"
+gunicorn = "*"
+pymongo = "*"
+requests = "*"
+
+[requires]
+python_version = "3.7"

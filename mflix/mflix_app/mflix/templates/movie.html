@@ -1,0 +1,114 @@
+{% extends "header.html" %}
+
+{% block body %}
+{% if movie %}
+    <div class="comment-notification content is-half">
+        {% if new_comment %}
+            <div class="notification is-dark content">
+                <h6>{{ current_user.first_name }}, thanks for posting a comment and joining the conversation!</h6>
+                <blockquote style="background-color: #505050;">{{ new_comment }}</blockquote>
+            </div>
+            <hr/>
+        {% endif %}
+    </div>
+    <div class="columns content">
+        <div class="column is-half">
+            <div class="content">
+                <h1>{{ movie['title'] }}</h1>
+                {% include "partials/movie_basic_info.html" %}
+                <blockquote>{{ movie['fullplot'] }}</blockquote>
+
+                <hr/>
+                {% set RATING_NAME = "Metacritic" %}
+                {% set VALID_RATING = 'metacritic' in movie %}
+                {% if VALID_RATING %}
+                    {% set MAX_RATING = 100 %}
+                    {% set rating = movie['metacritic'] %}
+                    {% include "partials/rating_bar.html" %}
+                {% endif %}
+
+                {% set RATING_NAME = "IMDB" %}
+                {% set VALID_RATING = movie.imdb and
+                      movie.imdb.rating and
+                      movie.imdb.rating is number and
+                      movie.imdb.votes and
+                      movie.imdb.votes is number %}
+                {% if VALID_RATING %}
+                    {% set MAX_RATING = 10 %}
+                    {% set rating = movie['imdb']['rating'] %}
+                    {% set votes = movie['imdb']['votes'] %}
+                    {% include "partials/rating_bar.html" %}
+                {% endif %}
+
+                {% set RATING_NAME = "Rotten Tomatoes" %}
+                {% set VALID_RATING = movie.tomatoes and
+                        movie.tomatoes.viewer and
+                        movie.tomatoes.viewer.rating and
+                        movie.tomatoes.viewer.rating is number and
+                        movie.tomatoes.viewer.numReviews and
+                        movie.tomatoes.viewer.numReviews is number %}
+                {% if VALID_RATING %}
+                    {% set MAX_RATING = 100 %}
+                    {% set RATING_MULTIPLIER = 20 %}
+                    {% set rating = movie['tomatoes']['viewers']['rating'] * RATING_MULTIPLIER %}
+                    {% set votes = movie['tomatoes']['viewers']['numReviews'] %}
+                    {% include "partials/rating_bar.html" %}
+                {% endif %}
+
+                <h5>Genres</h5>
+                <div class="tags">
+                    {% for genre in movie['genres'] %}
+                        <a class="tag button is-small is-dark" href="/?genre={{ genre }}">{{ genre }}</a>
+                    {% else %}
+                        No genres to show.
+                    {% endfor %}
+                </div>
+
+                <h5>Writers</h5>
+                <div class="tags">
+                    {% for writer in movie['writers'] %}
+                        <span class="tag is-small">{{ writer }}</span>
+                    {% else %}
+                        No writers to show.
+                    {% endfor %}
+                </div>
+
+                <h5>Cast</h5>
+                <div class="tags">
+                    {% for actor in movie['cast'] %}
+                        <a class="tag button is-small is-info" href="/?search={{ actor }}">{{ actor }}</a>
+                    {% else %}
+                        No actors to show.
+                    {% endfor %}
+                </div>
+
+                <p>
+                <a class="button" href="http://www.imdb.com/title/{{ movie['imdb']['id'] }}/">View On IMDB</a>
+                </p>
+            </div>
+        </div>
+        <div class="column content is-half has-text-centered">
+            <img src="{{ movie['poster'] or 'http://www.reelviews.net/resources/img/default_poster.jpg' }}" alt="No movie image found."/>
+            <h1>
+                <a class="button is-primary is-medium" href="/movies/watch/{{ movie['_id'] }}">Watch {{ movie['title'] }}</a>
+            </h1>
+        </div>
+    </div>
+
+    <hr/>
+    {% include "partials/comments_form.html" %}
+
+    <hr/>
+    {% set comments = movie['comments'] %}
+    {% include "partials/comments_list.html" %}
+
+    {% set MOVIE_COMMENT_CACHE_LIMIT = 10 %}
+    {% if 'num_mflix_comments' in movie and movie['num_mflix_comments'] > MOVIE_COMMENT_CACHE_LIMIT %}
+        <p>
+        <a class="button is-info" href="/movies/{{ movie['_id'] }}/comments">View All {{ movie['num_mflix_comments'] }} Comments</a>
+        </p>
+    {% endif %}
+{% else %}
+    {% include "partials/no_movie_found.html" %}
+{% endif %}
+{% endblock %}

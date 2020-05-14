@@ -1,0 +1,55 @@
+{% extends 'header.html' %}
+
+{% block body %}
+<div class="columns">
+    <div class="columns is-4">
+        {% if signuperror %}
+            <div class="notification is-warning">There is an error with your sign-up. {{ signuperror }}</div>
+        {% endif %}
+        <h3 class="title is-3">New User?</h3>
+        <h5 class="subtitle is-5">Create an account by filling out the form below</h5>
+        <form method="POST" action="{{ url_for('signup') }}">
+            {% set icon, name, placeholder = "user", "name", "Name" %}
+            {% include "partials/input_text_box.html" %}
+
+            {% set icon, name, placeholder = "envelope", "email", "Email" %}
+            {% include "partials/input_text_box.html" %}
+
+            {% set icon, name, placeholder = "lock", "password", "Password" %}
+            {% include "partials/input_text_box.html" %}
+
+            {% set icon, name, placeholder = "lock", "confirm-password", "Confirm Password" %}
+            {% include "partials/input_text_box.html" %}
+
+            <div class="field">
+                <p class="control">
+                    <input class="button is-primary" type="submit" value="Sign Up">
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <div class="column is-4"></div>
+
+    <div class="column is-4" id="signup-form">
+        {% if loginerror %}
+            <div class="notification is-warning">There is an error with your login. {{ loginerror }}</div>
+        {% endif %}
+        <h3 class="title is-3">Already have an account?</h3>
+        <h5 class="subtitle is-5">Log in with your email and password below</h5>
+        <form method="POST" action="{{ url_for('signup') }}">
+            {% set icon, name, placeholder = "envelope", "email", "Email" %}
+            {% include "partials/input_text_box.html" %}
+
+            {% set icon, name, placeholder = "lock", "password", "Password" %}
+            {% include "partials/input_text_box.html" %}
+
+            <div class="field">
+                <p class="control">
+                    <input class="button is-info" type="submit" value="Log In">
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

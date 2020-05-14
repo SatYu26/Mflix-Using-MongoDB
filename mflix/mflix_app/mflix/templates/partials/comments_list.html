@@ -1,0 +1,21 @@
+<div class="content">
+    {% for comment in comments %}
+        <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                    <strong>{{ comment['name'] }}</strong>
+                    <small>commented on {{ comment['date'].strftime('%A, %m/%d/%y') }}.</small>
+                    <br>
+                    <blockquote>{{ comment['text'] }}</blockquote>
+                    </p>
+                    {% if current_user.email == comment.email %}
+                        <form method="POST" action="{{ url_for('delete_movie_comment', movie_id=movie['_id'], comment_id=comment['_id']) }}">
+                            <input class="button is-danger" type="submit" value="Delete">
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+</div>

@@ -1,0 +1,17 @@
+{% extends 'header.html' %}
+
+{% block body %}
+{% if movie %}
+    <div class="content">
+        <h1>Watching <a href="/movies/{{ movie['_id'] }}">{{ movie['title'] }}</a>></h1>
+    </div>
+
+    {% include "partials/movie_basic_info.html" %}
+
+    <div style="border: 1px white solid; width: 562px;">
+        <iframe width="560" height="315" src="www.youtube.com/embed/{{ "dQw4w9WgXcQ" if (movie['year'] % 2 == 0) else "L_jWHffIx5E" }}?autoplay=1" frameborder="0" allowfullscreen></iframe>
+    </div>
+{% else %}
+    {% include "partials/no_movie_found.html" %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% include 'head.html' %}
+<div>
+    <nav class="level" style="padding: 2% 5% 0%;">
+        <div class="level-item has-text-centered">
+            <form style="width: 400px;" method="GET" action="/">
+                <div>
+                    <div class="field has-addons">
+                        <span class="control">
+                            <input class="input" type="text" name="search" placeholder="Find a movie or person" size="30">
+                        </span>
+                        <span class="control">
+                            <input class="button is-primary" type="submit" value="search">
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <h1 class="title is-1" style="width: 400px;">
+                <a href="/">Mflix</a>
+            </h1>
+        </div>
+
+        <div class="level-item has-text-centered">
+            <div class="inline-block" style="width: 400px;">
+                {% if current_user.is_authenticated %}
+                    <a class="button is-primary" href="{{ url_for('profile') }}">{{ current_user.first_name.title() }}</a>
+                    <a class="button" href="{{ url_for('logout') }}">Log Out</a>
+                {% else %}
+                    <a class="button is-primary" href="{{ url_for('signup') }}">Sign Up</a>
+                    <a class="button is-primary" href="{{ url_for('login') }}">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <hr/>
+    <div style="padding: 2% 5%;">
+        {% block body %}
+        {% endblock %}
+    </div>
+</div>

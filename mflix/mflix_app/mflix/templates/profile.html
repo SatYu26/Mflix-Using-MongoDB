@@ -1,0 +1,8 @@
+{% extends "header.html" %}
+
+{% block body %}
+<div class="has-text-centered content container">
+    <h1 class="title is-3">{{ current_user.name }}</h1>
+    <h2 class="subtitle is-5">{{ current_user.email }}</h2>
+</div>
+{% endblock %}
