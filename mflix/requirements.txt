@@ -16,7 +16,7 @@ greenlet==0.4.15 ; platform_python_implementation == 'CPython'
 gunicorn==20.0.4
 idna==2.9
 itsdangerous==1.1.0
-jinja2==2.11.1
+jinja2==2.11.3
 markupsafe==1.1.1
 marshmallow==3.5.1
 pycparser==2.20
